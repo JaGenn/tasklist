@@ -1,4 +1,4 @@
-package com.example.tasklist.domain.task;
+package com.example.tasklist.domain.entity.task;
 
 
 import lombok.*;

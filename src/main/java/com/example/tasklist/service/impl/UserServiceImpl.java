@@ -1,7 +1,7 @@
 package com.example.tasklist.service.impl;
 
 
-import com.example.tasklist.domain.user.User;
+import com.example.tasklist.domain.entity.user.User;
 import com.example.tasklist.service.UserService;
 import org.springframework.stereotype.Service;
 

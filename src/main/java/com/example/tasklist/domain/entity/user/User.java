@@ -1,7 +1,7 @@
-package com.example.tasklist.domain.user;
+package com.example.tasklist.domain.entity.user;
 
 
-import com.example.tasklist.domain.task.Task;
+import com.example.tasklist.domain.entity.task.Task;
 import lombok.*;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.example.tasklist.repository.impl;
 
-import com.example.tasklist.domain.user.Role;
-import com.example.tasklist.domain.user.User;
+import com.example.tasklist.domain.entity.user.Role;
+import com.example.tasklist.domain.entity.user.User;
 import com.example.tasklist.repository.UserRepository;
 import org.springframework.stereotype.Repository;
 

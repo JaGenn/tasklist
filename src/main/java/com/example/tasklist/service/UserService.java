@@ -1,6 +1,6 @@
 package com.example.tasklist.service;
 
-import com.example.tasklist.domain.user.User;
+import com.example.tasklist.domain.entity.user.User;
 
 public interface UserService extends CrudService<User, Long> {
 
