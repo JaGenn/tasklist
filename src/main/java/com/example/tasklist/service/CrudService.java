@@ -1,6 +1,6 @@
 package com.example.tasklist.service;
 
-public interface CrudService <T, ID> {
+public interface CrudService<T, ID> {
 
     T getById(ID id);
 
