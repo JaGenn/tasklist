@@ -2,7 +2,10 @@ package com.example.tasklist.web.security;
 
 
 import com.example.tasklist.domain.entity.user.Role;
+import com.example.tasklist.domain.entity.user.User;
+import com.example.tasklist.domain.exception.AccessDeniedException;
 import com.example.tasklist.service.UserService;
+import com.example.tasklist.web.dto.auth.JwtResponse;
 import com.example.tasklist.web.security.properties.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -72,6 +75,26 @@ public class JwtTokenProvider {
                 .expiration(Date.from(validity))
                 .signWith(key)
                 .compact();
+    }
+
+    public JwtResponse refreshUserTokens(
+            final String refreshToken
+    ) {
+        JwtResponse jwtResponse = new JwtResponse();
+        if (!isValid(refreshToken)) {
+            throw new AccessDeniedException();
+        }
+        Long userId = Long.valueOf(getId(refreshToken));
+        User user = userService.getById(userId);
+        jwtResponse.setId(userId);
+        jwtResponse.setUsername(user.getUsername());
+        jwtResponse.setAccessToken(
+                createAccessToken(userId, user.getUsername(), user.getRoles())
+        );
+        jwtResponse.setRefreshToken(
+                createRefreshToken(userId, user.getUsername())
+        );
+        return jwtResponse;
     }
 
     public boolean isValid(

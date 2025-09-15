@@ -1,37 +1,57 @@
 package com.example.tasklist.service.impl;
 
 
+import com.example.tasklist.domain.entity.task.Status;
 import com.example.tasklist.domain.entity.task.Task;
+import com.example.tasklist.domain.exception.ResourceNotFoundException;
+import com.example.tasklist.repository.TaskRepository;
 import com.example.tasklist.service.TaskService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService {
+
+    private final TaskRepository taskRepository;
+
 
     @Override
     public List<Task> getAllByUserId(Long userId) {
-        return List.of();
+        return taskRepository.findAllByUserId(userId);
     }
 
     @Override
     public Task getById(Long taskId) {
-        return null;
+        return taskRepository.findById(taskId)
+                .orElseThrow(() -> new ResourceNotFoundException("Task not found"));
     }
 
     @Override
-    public Task update(Task entity) {
-        return null;
+    @Transactional
+    public Task update(Task task) {
+        if (task.getStatus() == null) {
+            task.setStatus(Status.TODO);
+        }
+        taskRepository.update(task);
+        return task;
     }
 
     @Override
+    @Transactional
     public Task create(Task task, Long userId) {
-        return null;
+        task.setStatus(Status.TODO);
+        taskRepository.create(task);
+        taskRepository.assignToUserById(userId, task.getId());
+        return task;
     }
 
     @Override
+    @Transactional
     public void delete(Long taskId) {
-
+        taskRepository.delete(taskId);
     }
 }
