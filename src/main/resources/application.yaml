@@ -1,6 +1,14 @@
 spring:
   config:
     import: optional:file:.env[.properties]
+  cache:
+    type: redis
+    cache-names: redis-cache
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: 6379
+      password: ${REDIS_PASSWORD}
   datasource:
     url: jdbc:postgresql://${HOST}:5432/${POSTGRES_DB}
     username: ${POSTGRES_USERNAME}
@@ -15,8 +23,8 @@ spring:
 security:
   jwt:
     secret: ${JWT_SECRET}
-    access: 3600000
-    refresh: 2592000000
+    access: 1
+    refresh: 30
 server:
   port: 8080
 springdoc:
