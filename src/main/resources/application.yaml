@@ -20,6 +20,10 @@ spring:
     change-log: classpath:liquibase/db.changelog.yaml
     enabled: true
 #    default-schema: tasklist
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 security:
   jwt:
     secret: ${JWT_SECRET}
