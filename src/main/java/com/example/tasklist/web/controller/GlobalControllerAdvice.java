@@ -1,10 +1,7 @@
 package com.example.tasklist.web.controller;
 
 
-import com.example.tasklist.domain.exception.AccessDeniedException;
-import com.example.tasklist.domain.exception.ExceptionBody;
-import com.example.tasklist.domain.exception.ResourceMappingException;
-import com.example.tasklist.domain.exception.ResourceNotFoundException;
+import com.example.tasklist.domain.exception.*;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -85,5 +82,11 @@ public class GlobalControllerAdvice {
     public ExceptionBody handleException(Exception e) {
         e.printStackTrace();
         return new ExceptionBody("Internal error.");
+    }
+
+    @ExceptionHandler(ImageUploadException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionBody handleImageUpload(ImageUploadException e) {
+        return new ExceptionBody(e.getMessage());
     }
 }

@@ -1,8 +1,10 @@
 package com.example.tasklist.config;
 
 
+import com.example.tasklist.service.properties.MinioProperties;
 import com.example.tasklist.web.security.JwtTokenFilter;
 import com.example.tasklist.web.security.JwtTokenProvider;
+import io.minio.MinioClient;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -32,8 +34,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor(onConstructor = @__(@Lazy))
 public class ApplicationConfig {
 
-    private final ApplicationContext applicationContext;
     private final JwtTokenProvider jwtTokenProvider;
+    private final MinioProperties minioProperties;
 
 
     @Bean
@@ -65,6 +67,14 @@ public class ApplicationConfig {
                         .description("Demo Spring Boot application")
                         .version("1.0")
                 );
+    }
+
+    @Bean
+    public MinioClient minioClient() {
+        return MinioClient.builder()
+                .endpoint(minioProperties.getUrl())
+                .credentials(minioProperties.getAccessKey(), minioProperties.getSecretKey())
+                .build();
     }
 
     @Bean
