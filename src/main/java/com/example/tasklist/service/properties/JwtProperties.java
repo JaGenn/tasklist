@@ -1,4 +1,4 @@
-package com.example.tasklist.web.security.properties;
+package com.example.tasklist.service.properties;
 
 
 import lombok.Getter;

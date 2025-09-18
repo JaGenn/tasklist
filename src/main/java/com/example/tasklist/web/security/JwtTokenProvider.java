@@ -6,7 +6,7 @@ import com.example.tasklist.domain.entity.user.User;
 import com.example.tasklist.domain.exception.AccessDeniedException;
 import com.example.tasklist.service.UserService;
 import com.example.tasklist.web.dto.auth.JwtResponse;
-import com.example.tasklist.web.security.properties.JwtProperties;
+import com.example.tasklist.service.properties.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
