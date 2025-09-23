@@ -2,6 +2,7 @@
 <!DOCTYPE suppressions PUBLIC "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
         "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 <suppressions>
+    <suppress checks="LineLength"/>
     <suppress checks="MissingJavadocMethod"/>
     <suppress checks="JavadocPackage"/>
     <suppress checks="JavadocVariable"/>
@@ -9,6 +10,5 @@
     <suppress checks="HideUtilityClassConstructor"/>
     <suppress checks="MagicNumber"/>
     <suppress checks="HiddenField"/>
-<!--    <suppress checks="FinalParameters"/>-->
-    <suppress checks="LineLength"/>
+    <suppress checks="FinalParameters"/>
 </suppressions>
