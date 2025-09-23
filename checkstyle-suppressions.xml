@@ -9,6 +9,6 @@
     <suppress checks="HideUtilityClassConstructor"/>
     <suppress checks="MagicNumber"/>
     <suppress checks="HiddenField"/>
-<!--    <suppress checks="FinalParameters"/>-->
+    <suppress checks="FinalParameters"/>
     <suppress checks="LineLength"/>
 </suppressions>
