@@ -4,21 +4,6 @@ This application helps you organize creating and accessing tasks for users.
 
 You can access Swagger and see all available endpoints by visiting http://localhost:8080/swagger-ui/index.html
 
-## Technologies
-
-- Spring Boot
-- Liquibase
-- Spring Data JPA
-- REST API
-- Spring Sercurity, Security Expressions
-- JWT
-- Docker
-- Redis
-- Minio (NoSQL storage)
-- GraphQL
-- Gmail notification
-- Swagger
-
 ## Sequence diagram
 
 ![Sequence diagram](docs/sequence-diagram.png)
@@ -41,6 +26,21 @@ User can have roles - ROLE_USER or ROLE_ADMIN.
 Task class represents task in this application. Task can be created by user.
 
 Task can have images.
+
+## Technologies
+
+- Spring Boot
+- Liquibase
+- Spring Data JPA
+- REST API
+- Spring Sercurity, Security Expressions
+- JWT
+- Docker
+- Redis
+- Minio (NoSQL storage)
+- GraphQL
+- Gmail notification
+- Swagger
 
 ## Environments
 
