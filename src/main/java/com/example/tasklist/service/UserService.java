@@ -10,4 +10,6 @@ public interface UserService extends CrudService<User, Long> {
 
     boolean isTaskOwner(Long userId, Long taskId);
 
+    User getTaskAuthor(Long taskId);
+
 }

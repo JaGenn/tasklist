@@ -1,10 +1,12 @@
 package com.example.tasklist.service.impl;
 
 
+import com.example.tasklist.domain.MailType;
 import com.example.tasklist.domain.entity.user.Role;
 import com.example.tasklist.domain.entity.user.User;
 import com.example.tasklist.domain.exception.ResourceNotFoundException;
 import com.example.tasklist.repository.UserRepository;
+import com.example.tasklist.service.MailService;
 import com.example.tasklist.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Properties;
 import java.util.Set;
 
 @Service
@@ -23,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
 
     @Override
@@ -66,10 +70,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    @Caching(cacheable = {
-            @Cacheable(value = "UserService::getById", key = "#user.id"),
-            @Cacheable(value = "UserService::getByUsername", key = "#user.username")
-    })
     public User create(User user) {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalStateException("Username already exists.");
@@ -81,7 +81,15 @@ public class UserServiceImpl implements UserService {
         Set<Role> roles = Set.of(Role.ROLE_USER);
         user.setRoles(roles);
         userRepository.save(user);
+        mailService.sendEmail(user, MailType.REGISTRATION, new Properties());
         return user;
+    }
+
+    @Override
+    @CacheEvict(value = "UserService::getTaskAuthor", key = "#taskId")
+    public User getTaskAuthor(Long taskId) {
+        return userRepository.findTaskAuthor(taskId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
     @Override
